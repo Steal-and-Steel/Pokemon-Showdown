@@ -110,7 +110,8 @@ const BROADCAST_TOKEN = '!';
 
 const fs = require('fs');
 const path = require('path');
-
+const parseEmoticons = require('./chat-plugins/emoticons').parseEmoticons;
+const color = require('./config/color');
 class PatternTester {
 	// This class sounds like a RegExp
 	// In fact, one could in theory implement it as a RegExp subclass
@@ -239,6 +240,8 @@ class CommandContext {
 
 		if (message && message !== true && typeof message.then !== 'function') {
 			if (this.pmTarget) {
+				const parsedMsg = parseEmoticons(message, this.room, this.user, true);
+				if (parsedMsg) message = '/html ' + parsedMsg;
 				let buf = `|pm|${this.user.getIdentity()}|${this.pmTarget.getIdentity()}|${message}`;
 				this.user.send(buf);
 				if (this.pmTarget !== this.user) this.pmTarget.send(buf);
@@ -246,6 +249,7 @@ class CommandContext {
 				this.pmTarget.lastPM = this.user.userid;
 				this.user.lastPM = this.pmTarget.userid;
 			} else {
+				if (parseEmoticons(message, this.room, this.user)) return;
 				this.room.add(`|c|${this.user.getIdentity(this.room.id)}|${message}`);
 			}
 		}
