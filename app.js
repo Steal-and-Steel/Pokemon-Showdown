@@ -1,5 +1,5 @@
 /**
- * Main file
+ * Main file Bot test
  * Pokemon Showdown - http://pokemonshowdown.com/
  *
  * This is the main Pokemon Showdown app, and the file you should be
