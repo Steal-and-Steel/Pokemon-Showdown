@@ -1,5 +1,5 @@
 /**
- * GitHub Alert Notifications
+ * GitHub Alert Notifications Test
  * Pokemon Showdown - http://pokemonshowdown.com/
  *
  * This notifies a set of rooms of changes to specific repositor(y/ies).
